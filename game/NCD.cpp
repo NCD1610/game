@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
 
     SDL_Window* window = SDL_CreateWindow("ABC", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 900, 500, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    //Mix_Music* music = Mix_LoadMUS("meme.mp3");
-    //Mix_PlayMusic(music, -1);
+    Mix_Music* music = Mix_LoadMUS("meme.mp3");
+    Mix_PlayMusic(music, -1);
     Ground ground("ground.png");
     ground.LoadGround(renderer);
     LPlayer1 player1;
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
-    //Mix_FreeMusic(music);
+    Mix_FreeMusic(music);
     SDL_Quit();
     IMG_Quit();
     Mix_Quit();
