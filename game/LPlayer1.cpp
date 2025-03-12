@@ -16,13 +16,23 @@ void LPlayer1::handEvent1(SDL_Event e) {
 
 void LPlayer1::updatePlayer() {
 	Vx = 0; 
-	if (keysHeld.count(SDLK_RIGHT)) Vx += VEL;  
-	if (keysHeld.count(SDLK_LEFT))  Vx -= VEL;  
+	if (keysHeld.count(SDLK_RIGHT)) {
+		Vx += VEL;
+		right = true;
+	}
+	if (keysHeld.count(SDLK_LEFT)) {
+		Vx -= VEL;
+		right = false;
+	}
 	if (keysHeld.count(SDLK_UP) && !JUMP) {
 		Vy = -11 * gravity;
 		JUMP = true;
 	}
-	if (keysHeld.count(SDLK_KP_0)) bullets.push_back(Bullet{ PosX + 5, PosY, right });
+	if (keysHeld.count(SDLK_KP_0) && SDL_GetTicks() - lastbullet >= 500) {
+		SDL_Rect b = { PosX, PosY, 5, 5 };
+		bullets.push_back(Bullet{b, right });
+		lastbullet = SDL_GetTicks();
+	}
 }
 
 void LPlayer1::move1(int SWIDTH) {
@@ -37,10 +47,10 @@ void LPlayer1::move1(int SWIDTH) {
 
 void LPlayer1::UpdateBullets1(int SWIDTH) {
 	for (auto it = bullets.begin(); it != bullets.end();) {
-		if (it->right == true) it->x += it->Vel;
-		else it->x -= it->Vel;
-		if (it->x >= SWIDTH) it = bullets.erase(it);
-		else if (it->x == 0) it = bullets.erase(it);
+		if (it->right == true) it->rect.x += it->Vel;
+		else it->rect.x -= it->Vel;
+		if (it->rect.x >= SWIDTH) it = bullets.erase(it);
+		else if (it->rect.x == 0) it = bullets.erase(it);
 		else it++;
 	}
 }
@@ -53,8 +63,7 @@ void LPlayer1::render1(SDL_Renderer* render, double angle) {
 void LPlayer1::renderbullets1(SDL_Renderer* render) {
 	SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
 	for (auto it = bullets.begin(); it != bullets.end(); it++) {
-		SDL_Rect rect{ it->x, it->y, 5, 5 };
-		SDL_RenderFillRect(render, &rect);
+		SDL_RenderFillRect(render, &it->rect);
 	}
 	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 }

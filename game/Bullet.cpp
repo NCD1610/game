@@ -1,9 +1,8 @@
 #include"Header.h"
 #include"Bullet.h"
 
-Bullet::Bullet(int _x, int _y, bool check) {
-	x = _x;
-	y = _y;
+Bullet::Bullet(SDL_Rect _rect, bool check) {
+	rect = _rect;
 	right = check;
 	Vel = 15;
 }

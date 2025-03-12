@@ -35,3 +35,11 @@ void Ground::UpdateP1(LPlayer1& x) {
 		}
 	}
 }
+void Ground::UpdateBullets(LPlayer1& x) {
+	for (int i = 0; i < 2; i++) {
+		for (auto it = x.bullets.begin(); it != x.bullets.end();) {
+			if (it->rect.x > rectGround[i].x + rectGround[i].w || it->rect.x + it->rect.w < rectGround[i].x || it->rect.y > rectGround[i].y + rectGround[i].h || it->rect.y + it->rect.h < rectGround[i].y) it++;
+			else it = x.bullets.erase(it);
+		}
+	}
+}

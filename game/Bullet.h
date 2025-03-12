@@ -2,9 +2,9 @@
 #include"Header.h"
 
 struct Bullet {
-	int x, y;
+	SDL_Rect rect;
 	int Vel;
 	bool right;
 	
-	Bullet(int, int, bool check);
+	Bullet(SDL_Rect, bool check);
 };

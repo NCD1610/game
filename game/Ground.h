@@ -12,4 +12,5 @@ class Ground {
 		void renderground(SDL_Renderer*, double);
 		void LoadGround(SDL_Renderer*);
 		void UpdateP1(LPlayer1&);
+		void UpdateBullets(LPlayer1&);
 };

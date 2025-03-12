@@ -13,6 +13,7 @@ class LPlayer1{
 		bool JUMP, right;
 		vector<Bullet> bullets;
 		set<int> keysHeld;
+		Uint32 lastbullet;
 	public:
 		static const int WIDTH = 32;
 		static const int HEIGHT = 32;
