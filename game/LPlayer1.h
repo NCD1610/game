@@ -1,5 +1,6 @@
 #pragma once
 #include"header.h"
+#include"Bullet.h"
 
 class LPlayer1{
 	friend class Ground;
@@ -9,7 +10,9 @@ class LPlayer1{
 		SDL_Texture* texture;
 		SDL_Rect rectp1[4];
 		int frame = 0;
-		bool JUMP;
+		bool JUMP, right;
+		vector<Bullet> bullets;
+		set<int> keysHeld;
 	public:
 		static const int WIDTH = 32;
 		static const int HEIGHT = 32;
@@ -20,5 +23,7 @@ class LPlayer1{
 		void move1(int);
 		void render1(SDL_Renderer*, double);
 		void LoadFile1(string, SDL_Renderer*);
-		void jump1();
+		void UpdateBullets1(int);
+		void renderbullets1(SDL_Renderer*);
+		void updatePlayer();
 };

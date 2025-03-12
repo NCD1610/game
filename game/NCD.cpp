@@ -27,11 +27,13 @@ int main(int argc, char* argv[]) {
             player1.handEvent1(e);
         }
         SDL_RenderClear(renderer);
-        ground.renderground(renderer,0);
+        ground.renderground(renderer, 0);
+        player1.updatePlayer();
         player1.move1(900);
-        player1.jump1();
         ground.UpdateP1(player1);
         player1.render1(renderer, 0);
+        player1.UpdateBullets1(900);
+        player1.renderbullets1(renderer);
         SDL_RenderPresent(renderer);
         SDL_Delay(20);
     }

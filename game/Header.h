@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 #include <cstdlib>
 #include <ctime>
 #include <SDL_image.h>
