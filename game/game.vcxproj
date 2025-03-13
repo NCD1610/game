@@ -134,14 +134,14 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="LPlayer1.cpp" />
+    <ClCompile Include="LPlayer.cpp" />
     <ClCompile Include="NCD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="LPlayer1.h" />
+    <ClInclude Include="LPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

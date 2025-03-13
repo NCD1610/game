@@ -1,6 +1,6 @@
 #pragma once
 #include"Header.h"
-#include"LPlayer1.h"
+#include"LPlayer.h"
 
 class Ground {
 	private:
@@ -11,6 +11,6 @@ class Ground {
 		Ground(string);
 		void renderground(SDL_Renderer*, double);
 		void LoadGround(SDL_Renderer*);
-		void UpdateP1(LPlayer1&);
-		void UpdateBullets(LPlayer1&);
+		void UpdateP(LPlayer&);
+		void UpdateBullets(LPlayer&);
 };

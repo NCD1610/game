@@ -1,6 +1,6 @@
 #include"header.h"
 #include"Ground.h"
-#include"LPlayer1.h"
+#include"LPlayer.h"
 
 Ground::Ground(string file) {
 	ground = file;
@@ -19,7 +19,7 @@ void Ground::LoadGround(SDL_Renderer* render) {
 	texground = SDL_CreateTextureFromSurface(render, surface);
 	SDL_FreeSurface(surface);
 }
-void Ground::UpdateP1(LPlayer1& x) {
+void Ground::UpdateP(LPlayer& x) {
 	for (int i = 0; i < 2; i++) {
 		x.JUMP = true;
 		if (x.PosY <= rectGround[i].y + rectGround[i].h && x.PosX + x.WIDTH > rectGround[i].x && x.PosX < rectGround[i].x + rectGround[i].w) {
@@ -35,7 +35,7 @@ void Ground::UpdateP1(LPlayer1& x) {
 		}
 	}
 }
-void Ground::UpdateBullets(LPlayer1& x) {
+void Ground::UpdateBullets(LPlayer& x) {
 	for (int i = 0; i < 2; i++) {
 		for (auto it = x.bullets.begin(); it != x.bullets.end();) {
 			if (it->rect.x > rectGround[i].x + rectGround[i].w || it->rect.x + it->rect.w < rectGround[i].x || it->rect.y > rectGround[i].y + rectGround[i].h || it->rect.y + it->rect.h < rectGround[i].y) it++;

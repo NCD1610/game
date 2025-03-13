@@ -1,5 +1,5 @@
 ﻿#include"Header.h"
-#include"LPlayer1.h"
+#include"LPlayer.h"
 #include"Ground.h"
 
 
@@ -16,25 +16,38 @@ int main(int argc, char* argv[]) {
     //Mix_PlayMusic(music, -1);
     Ground ground("ground.png");
     ground.LoadGround(renderer);
-    LPlayer1 player1;
-    player1.LoadFile1("player1.png", renderer);
+    LPlayer player1(1);
+    LPlayer player2(2);
+    player1.LoadFile("player1.png", renderer);
+    player2.LoadFile("player2.png", renderer);
 
     bool quit = false;
     SDL_Event e;
     while (quit == false) {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) quit = true;
-            player1.handEvent1(e);
+            player1.handEvent(e);
+            player2.handEvent(e);
         }
         SDL_RenderClear(renderer);
         ground.renderground(renderer, 0);
-        player1.updatePlayer();
-        player1.move1(900);
-        ground.UpdateP1(player1);
-        player1.render1(renderer, 0);
-        player1.UpdateBullets1(900);
-        player1.renderbullets1(renderer);
+
+        player1.updatePlayer(1);
+        player1.move(900);
+        ground.UpdateP(player1);
+        player1.render(renderer, 0);
+        player1.UpdateBullets(900, player2, 2);
+        player1.renderbullets(renderer);
         ground.UpdateBullets(player1);
+
+        player2.updatePlayer(2);
+        player2.move(900);
+        ground.UpdateP(player2);
+        player2.render(renderer, 0);
+        player2.UpdateBullets(900, player1, 1);
+        player2.renderbullets(renderer);
+        ground.UpdateBullets(player2);
+
         SDL_RenderPresent(renderer);
         SDL_Delay(20);
     }

@@ -18,7 +18,7 @@
     <ClCompile Include="NCD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LPlayer1.cpp">
+    <ClCompile Include="LPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
@@ -32,7 +32,7 @@
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LPlayer1.h">
+    <ClInclude Include="LPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
