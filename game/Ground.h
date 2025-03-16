@@ -4,7 +4,7 @@
 
 class Ground {
 	private:
-		SDL_Rect rectGround[10];
+		SDL_Rect rectGround[8];
 		string ground;
 		SDL_Texture* texground;
 	public:

@@ -7,6 +7,7 @@
 #include <set>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
