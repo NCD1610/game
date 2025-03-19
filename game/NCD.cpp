@@ -20,7 +20,6 @@ int main(int argc, char* argv[]) {
     LPlayer player1(1, animation1);
     LPlayer player2(2, animation2);
     
-
     bool quit = false;
     SDL_Event e;
     while (quit == false) {
