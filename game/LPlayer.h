@@ -7,24 +7,29 @@ class LPlayer{
 	private:
 		int PosX, PosY;
 		int Vx, Vy;
+		int hp;
+		int VEL;
 		const char* animation[8];
 		SDL_Texture* texture;
+		SDL_Texture* texhp;
 		int frame = 0;
-		bool JUMP, right;
+		bool JUMP, right, buffspeed;
 		vector<Bullet> bullets;
 		set<int> keysHeld;
-		Uint32 lastbullet, lastanimation;
+		Uint32 lastbullet, lastanimation, lastbuffspeed;
+		Mix_Chunk* shoot;
+		Mix_Chunk* appear;
 	public:
 		static const int WIDTH = 32;
 		static const int HEIGHT = 32;
-		static const int VEL = 7;
 		static const int gravity = 3;
 		LPlayer(int, const char* []);
 		void handEvent(SDL_Event);
-		void move(int, int);
-		void render(SDL_Renderer*, double);
+		void move(int, int, int);
+		void render(SDL_Renderer*, int);
 		void LoadFile(SDL_Renderer*);
 		void UpdateBullets(int, LPlayer&, int);
 		void renderbullets(SDL_Renderer*);
+		void renderhp(SDL_Renderer*, int);
 		void updatePlayer(int);
 };

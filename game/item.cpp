@@ -3,6 +3,6 @@
 #include"LPlayer.h"
 
 item::item(int x, int y, int k) {
-	rect = { x, y, 10, 10 };
+	rect = { x, y, 30, 30 };
 	buff = k;
-}
+}	

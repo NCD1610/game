@@ -2,22 +2,32 @@
 #include"LPlayer.h"
 #include"Bullet.h"
 
-LPlayer::LPlayer(int x, const char* _animation[]) {
+LPlayer::LPlayer(int x, const char* _animation[]) {   
 	for (int i = 0; i < 8; i++) animation[i] = _animation[i];
 	if(x == 2) PosX = 0; PosY = 0;
 	if (x == 1) PosX = 931 - WIDTH; PosY = 0;
 	Vx = 0; Vy = 3;
+	hp = 5;
+	VEL = 7;
 	JUMP = true;
 	right = true;
+	buffspeed = false;
 	frame = 7;
+	shoot = Mix_LoadWAV("shoot.mp3");
+	appear = Mix_LoadWAV("appear.mp3");
 }
 
-void LPlayer::handEvent(SDL_Event e) {
+void LPlayer::handEvent(SDL_Event e) {     
 	if (e.type == SDL_KEYDOWN) keysHeld.insert(e.key.keysym.sym);
 	if (e.type == SDL_KEYUP) keysHeld.erase(e.key.keysym.sym);
 }
 
-void LPlayer::updatePlayer(int x) {
+void LPlayer::updatePlayer(int x) {       
+	if (SDL_GetTicks() - lastbuffspeed <= 1000 && buffspeed) VEL = 12;
+	else {
+		VEL = 7;
+		buffspeed = false;
+	}
 	Vx = 0; 
 	if (x == 1) {
 		if (keysHeld.count(SDLK_RIGHT)) {
@@ -37,6 +47,7 @@ void LPlayer::updatePlayer(int x) {
 			SDL_Rect b = { PosX, PosY, 5, 5 };
 			bullets.push_back(Bullet{ b, right });
 			lastbullet = SDL_GetTicks();
+			Mix_PlayChannel(-1, shoot, 0);
 		}
 	}
 	if (x == 2) {
@@ -57,18 +68,28 @@ void LPlayer::updatePlayer(int x) {
 			SDL_Rect b = { PosX, PosY + 6, 5, 5 };
 			bullets.push_back(Bullet{ b, right });
 			lastbullet = SDL_GetTicks();
+			Mix_PlayChannel(-1, shoot, 0);
 		}
 	}
 }
 
-void LPlayer::move(int SWIDTH, int SHEIGHT) {
+void LPlayer::move(int SWIDTH, int SHEIGHT, int x) {  
 	PosX += Vx;
 	if (PosX + WIDTH > SWIDTH) PosX = SWIDTH - WIDTH;
 	else if (PosX < 0) PosX = 0;
 	if (JUMP == true) {
 		if(Vy <= 24) Vy += gravity;
 		PosY += Vy;
-		if (PosY > SHEIGHT - HEIGHT) PosY = SHEIGHT - HEIGHT;
+		if (PosY > SHEIGHT - HEIGHT) {
+			if (x == 2) PosX = 0; PosY = 0;
+			if (x == 1) PosX = 931 - WIDTH; PosY = 0;
+			Vx = 0; Vy = 3;
+			hp = 5;
+			JUMP = true;
+			right = true;
+			frame = 7;
+			Mix_PlayChannel(-1, appear, 0);
+		}
 	}
 }
 
@@ -83,17 +104,44 @@ void LPlayer::UpdateBullets(int SWIDTH, LPlayer& other, int x) {
 	for (auto it = bullets.begin(); it != bullets.end();) {
 		if (it->rect.x > other.PosX + other.WIDTH || it->rect.x + it->rect.w < other.PosX || it->rect.y > other.PosY + other.HEIGHT || it->rect.y + it->rect.h < other.PosY) it++;
 		else {
+			other.hp--;
+			if (other.hp == 0) {
+				if (x == 2) other.PosX = 0; other.PosY = 0;
+				if (x == 1) other.PosX = 931 - other.WIDTH; other.PosY = 0;
+				other.Vx = 0; other.Vy = 3;
+				other.hp = 5;
+				other.VEL = 7;
+				other.JUMP = true;
+				other.right = true;
+				other.buffspeed = false;
+				other.frame = 7;
+				Mix_PlayChannel(-1, appear, 0);
+			}
 			it = bullets.erase(it);
-			if (x == 2) other.PosX = 0; other.PosY = 0;
-			if (x == 1) other.PosX = SWIDTH - other.WIDTH; other.PosY = 0;
 		}
 	}
 }
 
-void LPlayer::render(SDL_Renderer* render, double angle) {
+void LPlayer::render(SDL_Renderer* render, int x) {
 	SDL_Rect RECT = {PosX, PosY, WIDTH, HEIGHT};
-	if(right == false) SDL_RenderCopyEx(render, texture, NULL, &RECT, angle, NULL, SDL_FLIP_HORIZONTAL);
-	else SDL_RenderCopyEx(render, texture, NULL, &RECT, angle, NULL, SDL_FLIP_NONE);
+	if(right == false) SDL_RenderCopyEx(render, texture, NULL, &RECT, 0, NULL, SDL_FLIP_HORIZONTAL);
+	else SDL_RenderCopyEx(render, texture, NULL, &RECT, 0, NULL, SDL_FLIP_NONE);
+}
+
+void LPlayer::renderhp(SDL_Renderer* render, int x) {
+	if (x == 2) {
+		SDL_Rect pos = { 5, 0, 30 ,30 };
+		for (int i = 0; i < hp; i++) {
+			SDL_RenderCopyEx(render, texhp, NULL, &pos, 0, NULL, SDL_FLIP_NONE);
+			pos.x += 35;
+		}
+	}else {
+		SDL_Rect pos = { 895, 0, 30 ,30 };
+		for (int i = 0; i < hp; i++) {
+			SDL_RenderCopyEx(render, texhp, NULL, &pos, 0, NULL, SDL_FLIP_NONE);
+			pos.x -= 35;
+		}
+	}
 }
 
 void LPlayer::renderbullets(SDL_Renderer* render) {
@@ -117,5 +165,10 @@ void LPlayer::LoadFile(SDL_Renderer* render) {
 	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255));
 	SDL_DestroyTexture(texture);
 	texture = SDL_CreateTextureFromSurface(render, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("heal.png");
+	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255));
+	SDL_DestroyTexture(texhp);
+	texhp = SDL_CreateTextureFromSurface(render, surface);
 	SDL_FreeSurface(surface);
 }
