@@ -42,8 +42,7 @@
               "RelativeToolTip": "game\\Ground.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-27T10:17:56.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T10:17:56.957Z"
             },
             {
               "$type": "Document",
@@ -53,7 +52,7 @@
               "RelativeDocumentMoniker": "game\\NCD.cpp",
               "ToolTip": "D:\\game\\game\\NCD.cpp",
               "RelativeToolTip": "game\\NCD.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACIAAACNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-19T17:21:17.963Z",
               "EditorCaption": ""
@@ -68,8 +67,7 @@
               "RelativeToolTip": "game\\LPlayer.h",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-26T13:28:13.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T13:28:13.771Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "game\\LPlayer.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGIAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-25T17:09:40.968Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T17:09:40.968Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "game\\Ground.cpp",
               "ViewState": "AgIAAF8AAAAAAAAAAAAiwGwAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-19T19:29:34.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T19:29:34.471Z"
             }
           ]
         }

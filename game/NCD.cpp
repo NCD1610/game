@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     while (quit == false) {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) quit = true;
-            else if (e.type == SDL_MOUSEBUTTONUP && e.button.x >= 415 && e.button.x <= 485 && e.button.y >= 410 && e.button.y <= 480) {
+            else if (e.type == SDL_MOUSEBUTTONUP && e.button.x >= 415 && e.button.x <= 485 && e.button.y >= 410 && e.button.y <= 480 && res != 0) {
                 res = 0;
                 player1.spawnPlayer();
                 player2.spawnPlayer();
