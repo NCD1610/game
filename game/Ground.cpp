@@ -104,3 +104,7 @@ void Ground::RandomItem() {
 		items.push_back(item{ x, y, rand() % 3 });
 	}
 }
+
+void Ground::clearItem() {
+	items.clear();
+}

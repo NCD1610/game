@@ -9,6 +9,7 @@ class LPlayer{
 		int Vx, Vy;
 		int hp;
 		int VEL;
+		int number;
 		const char* animation[8];
 		SDL_Texture* texture;
 		SDL_Texture* texhp;
@@ -25,11 +26,12 @@ class LPlayer{
 		static const int gravity = 3;
 		LPlayer(int, const char* []);
 		void handEvent(SDL_Event);
-		void move(int, int, int);
-		void render(SDL_Renderer*, int);
+		void move(int, int);
+		void render(SDL_Renderer*);
 		void LoadFile(SDL_Renderer*);
-		void UpdateBullets(int, LPlayer&, int);
+		void UpdateBullets(int, LPlayer&, int&);
 		void renderbullets(SDL_Renderer*);
-		void renderhp(SDL_Renderer*, int);
-		void updatePlayer(int);
+		void renderhp(SDL_Renderer*);
+		void updatePlayer();
+		void spawnPlayer();
 };

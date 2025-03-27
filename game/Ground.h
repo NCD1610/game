@@ -20,4 +20,5 @@ class Ground {
 		void UpdateBullets(LPlayer&);
 		void UpdateBuff(LPlayer&);
 		void RandomItem();
+		void clearItem();
 };
