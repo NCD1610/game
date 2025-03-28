@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     srand(time(0));
 
-    SDL_Window* window = SDL_CreateWindow("ABC", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 931, 500, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Last Warriors", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 931, 500, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     SDL_Texture* tex;
     SDL_Rect a{160, 0, 700, 383}, w{415, 410, 70, 70};
